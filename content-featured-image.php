@@ -5,7 +5,7 @@ Description: Set the first content image to feature post image.
 Author: Ovi García - ovimedia.es
 Author URI: http://www.ovimedia.es/
 Text Domain: content-featured-image
-Version: 0.1
+Version: 0.2
 Plugin URI: http://www.ovimedia.es/
 */
 
@@ -32,7 +32,7 @@ if ( ! class_exists( 'content_featured_image' ) )
             if( $page_viewed == "cfi_featured_images" ) 
             {
                 $this->cfi_set_featured_images();
-                wp_redirect("./wp-admin/admin.php?page=content-featured-image&result=ok");
+                wp_redirect(get_admin_url()."admin.php?page=content-featured-image&result=ok");
                 exit();
             }
 		}
@@ -40,7 +40,7 @@ if ( ! class_exists( 'content_featured_image' ) )
         public function cfi_options()
         {
             ?>
-            <form action="/cfi_featured_images" method="post" >
+            <form action="<?php echo get_admin_url(); ?>cfi_featured_images" method="post" >
 
                 <h4>Click the button to set the featured image from the first content image in the post.</h4>
                 
