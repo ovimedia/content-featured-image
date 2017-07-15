@@ -6,8 +6,10 @@ Author: Ovi García - ovimedia.es
 Author URI: http://www.ovimedia.es/
 Text Domain: content-featured-image
 Version: 0.3
-Plugin URI: http://www.ovimedia.es/
+Plugin URI: https://github.com/ovimedia/content-featured-image
 */
+
+if ( ! defined( 'ABSPATH' ) ) exit; 
 
 if ( ! class_exists( 'content_featured_image' ) ) 
 {
@@ -15,7 +17,13 @@ if ( ! class_exists( 'content_featured_image' ) )
     {        
         function __construct() 
         {   
-            add_action( 'admin_menu', array( $this, 'cfi_admin_menu' ));
+            add_action( 'init', array( $this, 'cfi_load_languages') );
+            add_action( 'admin_menu', array( $this, 'cfi_admin_menu' )); 
+        }
+
+        public function cfi_load_languages() 
+        {
+            load_plugin_textdomain( 'content-featured-image', false, '/'.basename( dirname( __FILE__ ) ) . '/languages/' ); 
         }
 
         public function cfi_admin_menu() 
@@ -32,15 +40,17 @@ if ( ! class_exists( 'content_featured_image' ) )
 
             <form action="<?php echo get_admin_url()."admin.php?page=content-featured-image"; ?>" method="post" >
 
-                <h4>Click the button to set the featured image from the first content image in the post.</h4>
+                <h4><?php echo translate( 'Click the button to set the featured image from the first content image in the post.', 'content-featured-image' ); ?></h4>
 
-                <p>Replace featured image with content image:
+                <p><label for="force_replace"><?php echo translate( 'Replace featured image with first content image:', 'content-featured-image' ); ?></label>
                 <select id="force_replace" name="force_replace">
-                    <option value="0">No </option>
-                    <option value="1" >Yes</option>
+                    <option value="0"><?php echo translate( 'No', 'content-featured-image' ); ?> </option>
+                    <option value="1" ><?php echo translate( 'Yes', 'content-featured-image' ); ?></option>
                 </select></p>
 
-                <p>Select post type to asign featured images: <select id="post_type" name="post_type">
+                <p><label for="post_type"><?php echo translate( 'Select post type to assign featured images:', 'content-featured-image' ); ?></label>
+                
+                <select id="post_type" name="post_type">
 
                     <?php
                         global $wpdb;
@@ -67,7 +77,7 @@ if ( ! class_exists( 'content_featured_image' ) )
                 
                 </select></p>
                
-                <input type="submit"  class="button button-primary"  value="Set featured images" />
+                <input type="submit"  class="button button-primary"  value="<?php echo translate( 'Set featured images', 'content-featured-image' ); ?>" />
 
             </form>
 
@@ -136,11 +146,9 @@ if ( ! class_exists( 'content_featured_image' ) )
                     }
                 }
 
-                echo "<p>Featured pictures successfully assigned.</p>";
+                echo "<p>".translate( 'Featured pictures successfully assigned.', 'content-featured-image' )."</p>";
             }
         }
-
-
 
         public function cfi_get_attachment_id_from_url( $attachment_url = '' ) 
         {

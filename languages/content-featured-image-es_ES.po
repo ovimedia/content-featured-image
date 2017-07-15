@@ -1,0 +1,47 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es_ES\n"
+"X-Generator: Poedit 2.0.2\n"
+
+# @ su
+#: content-featured-image.php
+msgid "Click the button to set the featured image from the first content image in the post."
+msgstr "Haz clic en el botón para establecer la imagen destacada a partir de la primera imagen de contenido de la publicación."
+
+# @ su
+#: content-featured-image.php
+msgid "Replace featured image with first content image:"
+msgstr "Reemplazar la imagen destacada por la primera imagen del contenido:"
+
+# @ su
+#: content-featured-image.php
+msgid "No"
+msgstr "No"
+
+# @ su
+#: content-featured-image.php
+msgid "Yes"
+msgstr "Si"
+
+# @ su
+#: content-featured-image.php
+msgid "Select post type to assign featured images:"
+msgstr "Seleccione el tipo de publicación para asignar las imágenes destacadas:"
+
+# @ su
+#: content-featured-image.php
+msgid "Featured pictures successfully assigned."
+msgstr "Imágenes destacadas asignadas con éxito."
+
+# @ su
+#: content-featured-image.php
+msgid "Set featured images"
+msgstr "Establecer imágenes destacadas"
