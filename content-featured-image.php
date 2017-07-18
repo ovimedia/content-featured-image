@@ -86,8 +86,8 @@ if ( ! class_exists( 'content_featured_image' ) )
             if(isset($_REQUEST["post_type"] )) 
             {
                 $types = array("jpg", "png", "gif");
-
-                $dir = "../wp-content/uploads/".date("Y")."/".date("m")."/";
+                $wp_upload_dir = wp_upload_dir();
+                $dir = $wp_upload_dir['path']."/";
 
                 if(!file_exists ($dir))
                     mkdir($dir);
@@ -123,8 +123,6 @@ if ( ! class_exists( 'content_featured_image' ) )
                                 file_put_contents($filename, fopen($url, "r"));   
 
                                 $filetype = wp_check_filetype( basename( $filename ), null );
-
-                                $wp_upload_dir = wp_upload_dir();
 
                                 $attachment = array(
                                     'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ), 
