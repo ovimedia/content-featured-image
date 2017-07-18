@@ -120,6 +120,12 @@ if ( ! class_exists( 'content_featured_image' ) )
                             if(in_array(substr($url, -3), $types) )
                             {
                                 $filename = $dir.basename($url);
+
+                                while(file_exists($filename))
+                                {
+                                    $filename = $dir.rand(0,1000).basename($url);
+                                }
+
                                 file_put_contents($filename, fopen($url, "r"));   
 
                                 $filetype = wp_check_filetype( basename( $filename ), null );
@@ -139,6 +145,10 @@ if ( ! class_exists( 'content_featured_image' ) )
                                 wp_update_attachment_metadata( $attach_id, $attach_data );
                                     
                                 set_post_thumbnail($post->ID, $attach_id);
+
+                                $post->post_content = str_replace($url, $wp_upload_dir['url'] . '/' . basename( $filename ) ,$post->post_content);
+
+                                wp_update_post($post);
                             }
                         }
                     }
