@@ -5,7 +5,7 @@ Description: Set the first content image to feature post image.
 Author: Ovi García - ovimedia.es
 Author URI: http://www.ovimedia.es/
 Text Domain: content-featured-image
-Version: 0.3
+Version: 0.4
 Plugin URI: https://github.com/ovimedia/content-featured-image
 */
 
@@ -94,10 +94,13 @@ if ( ! class_exists( 'content_featured_image' ) )
 
                 $args = array(
                 'numberposts' =>   -1,
+		        'post_status'      => 'publish',
                 'post_type' => $_REQUEST['post_type'],
                 ); 
 
                 $posts = get_posts($args); 
+
+                $x = 0;
 
                 foreach($posts as $post)
                 {
@@ -111,7 +114,7 @@ if ( ! class_exists( 'content_featured_image' ) )
 
                     if(get_the_post_thumbnail($post->ID) == "" || $_REQUEST['force_replace'] == "1")
                     {
-                        if(strpos($url, get_home_url()) > 0)
+                        if(strpos($url, get_home_url()) !== false)
                         {       
                             set_post_thumbnail($post->ID, $this->cfi_get_attachment_id_from_url($url));
                         }
@@ -151,7 +154,12 @@ if ( ! class_exists( 'content_featured_image' ) )
                                 wp_update_post($post);
                             }
                         }
-                    }
+                    }      
+
+                    $x++;
+                    
+                    if($x % 5 == 0)
+                        sleep(1);              
                 }
 
                 echo "<p>".translate( 'Featured pictures successfully assigned.', 'content-featured-image' )."</p>";
@@ -169,9 +177,7 @@ if ( ! class_exists( 'content_featured_image' ) )
             $upload_dir_paths = wp_upload_dir();
         
             if ( false !== strpos( $attachment_url, $upload_dir_paths['baseurl'] ) ) 
-            {
-                $attachment_url = preg_replace( '/-\d+x\d+(?=\.(jpg|jpeg|png|gif)$)/i', '', $attachment_url );
-        
+            {        
                 $attachment_url = str_replace( $upload_dir_paths['baseurl'] . '/', '', $attachment_url );
         
                 $attachment_id = $wpdb->get_var( $wpdb->prepare( "SELECT wposts.ID FROM $wpdb->posts wposts, 

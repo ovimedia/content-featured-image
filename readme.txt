@@ -10,7 +10,7 @@ Set the first content image to featured post image.
 
 == Description ==
 
-Set the first content image to featured post image. You can select the post type to assign te featured image
+Set the first content image to featured post image. You can select the post type to assign the featured image
 
 == Installation ==
 
