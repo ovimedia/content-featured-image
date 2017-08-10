@@ -5,7 +5,7 @@ Description: Set the first content image to feature post image.
 Author: Ovi García - ovimedia.es
 Author URI: http://www.ovimedia.es/
 Text Domain: content-featured-image
-Version: 0.3
+Version: 0.3.1
 Plugin URI: https://github.com/ovimedia/content-featured-image
 */
 
