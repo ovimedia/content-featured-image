@@ -94,6 +94,7 @@ if ( ! class_exists( 'content_featured_image' ) )
 
                 $args = array(
                 'numberposts' =>   -1,
+		'post_status'      => 'publish',
                 'post_type' => $_REQUEST['post_type'],
                 ); 
 
@@ -152,6 +153,8 @@ if ( ! class_exists( 'content_featured_image' ) )
                             }
                         }
                     }
+			
+		    sleep(1);
                 }
 
                 echo "<p>".translate( 'Featured pictures successfully assigned.', 'content-featured-image' )."</p>";
